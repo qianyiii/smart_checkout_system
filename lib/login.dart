@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_checkout_system/home.dart';
 
 class Login extends StatefulWidget {
   static String id = 'login';
@@ -11,11 +12,6 @@ class _LoginState extends State<Login> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  void _login() {
-    // Here, you can implement the login logic.
-    // Check the entered username and password,
-    // and navigate to the appropriate page if successful.
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +34,10 @@ class _LoginState extends State<Login> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _login,
               child: Text('Login'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()),);
+              },
             ),
           ],
         ),
@@ -47,6 +45,7 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
 
 
 

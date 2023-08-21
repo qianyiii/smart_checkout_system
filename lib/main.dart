@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/welcome.dart';
 import 'package:smart_checkout_system/login.dart';
 import 'package:smart_checkout_system/registration.dart';
+import 'package:smart_checkout_system/home.dart';
 
 void main() {
   runApp( MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         Welcome.id: (context) => Welcome(),
         Login.id: (context) => Login(),
         Registration.id: (context) => Registration(),
+        Home.id: (context) => Home(),
       },
     );
   }
