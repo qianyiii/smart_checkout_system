@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_checkout_system/welcome.dart';
+import 'package:smart_checkout_system/account.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -13,7 +15,6 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
 
 class Home extends StatefulWidget {
   static String id = 'home';
@@ -49,11 +50,42 @@ class _HomeState extends State<Home> {
     // Add more products here
   ];
 
-
   List<PurchaseRecord> purchaseHistory = [
     // Add purchase history items here...
     PurchaseRecord(productName: 'Win2 Potato Crisp (Tomato flavour) - 20g', date: '21/8/2023', price: 0.50)
   ];
+
+  Future<void> _showLogoutConfimation(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Confirm Logout'),
+          content: Text('Are you sure want to logout ?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Yes'),
+              onPressed: (){
+                Navigator.of(context).pop();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()),);
+              },
+            ),
+            TextButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      }
+    );
+  }
+
+  void _navigateToAccountPage() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Account()),);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +100,15 @@ class _HomeState extends State<Home> {
                 child: NavigationRail(
                   selectedIndex: _selectedIndex,
                   onDestinationSelected: (int index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
+                    if (index == 4) {
+                      _showLogoutConfimation(context);
+                    } else if (index == 3) { // Account
+                      _navigateToAccountPage();
+                    } else {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
+                    }
                   },
                   labelType: NavigationRailLabelType.selected,
                   backgroundColor: Colors.green,
@@ -141,6 +179,7 @@ class _HomeState extends State<Home> {
                       Expanded(child: ListView.builder(itemCount: purchaseHistory.length,itemBuilder: (context, index){
                         return PurchaseRecordCard(record: purchaseHistory[index]);
                       },))
+
                   ],
                 ),
               ),

@@ -53,6 +53,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(title: Text('Smart Checkout'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(

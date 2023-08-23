@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:smart_checkout_system/adminLogin.dart';
-import 'package:smart_checkout_system/home.dart';
-import 'package:smart_checkout_system/registration.dart';
+import 'package:smart_checkout_system/adminHome.dart';
 
-class Login extends StatefulWidget {
-  static String id = 'login';
+class AdminLogin extends StatefulWidget {
+  static String id = 'adminlogin';
 
   @override
-  State<Login> createState() => _LoginState();
+  State<AdminLogin> createState() => _AdminLoginState();
 }
 
-class _LoginState extends State<Login> {
+class _AdminLoginState extends State<AdminLogin> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
@@ -51,38 +49,14 @@ class _LoginState extends State<Login> {
               children: [
                 Container(
                     alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(bottom: 25),
                     child: Text(
                       'Welcome Back !',
                       style: TextStyle(fontSize: 24,
                           fontWeight: FontWeight.bold),
-                    )
+                    ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Access your account below or ',
-                        style: TextStyle(fontSize: 16
-                        ),
-                      ),
-                      //By pressing this text button, it will navigate to the register page.
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Registration()),
-                          );
-                        }, child: Text(
-                        'Create Account',
-                        style: TextStyle(fontSize: 16,
-                        ),
-                      ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Container(
                   margin: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
@@ -107,7 +81,7 @@ class _LoginState extends State<Login> {
 
                 SizedBox(
                   width: 150,
-                  height: 40,
+                  height: 50,
                   child: ElevatedButton(
                     onPressed: () {
                       String email = _emailController.text.trim();
@@ -122,25 +96,11 @@ class _LoginState extends State<Login> {
                       }
 
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()),);
-                      },
+                        MaterialPageRoute(builder: (context) => AdminHome()),);
+                    },
                     child: Text('Login'),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: TextButton(onPressed: (){
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AdminLogin()),);
-                  },
-                  child: Text('Login as admin',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16,
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline),
-                  ),
-                  ),
-                ),
+                )
               ],
             ),
           ),
