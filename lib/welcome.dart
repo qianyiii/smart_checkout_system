@@ -1,6 +1,8 @@
+import 'package:flutter/services.dart';
 import 'package:smart_checkout_system/login.dart';
 import 'package:smart_checkout_system/registration.dart';
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 
 class Welcome extends StatefulWidget {
   static String id = 'welcome';
@@ -13,6 +15,7 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
   //Create an AnimationController object
   AnimationController? controller;
+
   //Create an Animation object
   Animation? animation;
 
@@ -35,8 +38,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
 
     //Call the addListener() method, the setState() - this is the one that is going to update the animation of the UI
     controller!.addListener(() {
-      setState(() {
-      });
+      setState(() {});
     });
   }
 
@@ -51,54 +53,71 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Smart Checkout'),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              icon: Icon(Icons.login),
-              label: Text("Login"),
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                backgroundColor: MaterialStateProperty.all(Color(0xFF42A5F5)),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                ),
-              ),
-
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                );
-              },
-            ),
-            SizedBox(height: 50),
-            ElevatedButton.icon(
-              icon: Icon(Icons.person_add),
-              label: Text('Register'),
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                backgroundColor: MaterialStateProperty.all(Color(0xFF42A5F5)),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Registration()),
-                );
-              },
-            ),
-          ],
+        appBar: AppBar(title: Text('RFID Smart One-Time Checkout System'),
+          backgroundColor: Colors.orange[900],
+          centerTitle: true,
+          automaticallyImplyLeading: false,
         ),
-      ),
+        body: Stack(children: [
+          Container(
+            //Used to decorate the container widget with an image as its background.
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/home.png'),
+                fit: BoxFit.contain,
+                alignment: Alignment.center,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 240,
+            right: 60,
+            child: TextButton(onPressed: (){
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Login()),);
+            },
+              child: Text('Login',
+                textAlign: TextAlign.right,
+                style: TextStyle(fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 195,
+            right: 50,
+            child: TextButton(onPressed: (){
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Registration()),);
+            },
+              child: Text('Register',
+                textAlign: TextAlign.right,
+                style: TextStyle(fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 140,
+            right: 60,
+            child: TextButton(onPressed: (){
+              html.window.close();
+              SystemNavigator.pop(); // 直接退出应用程序
+            },
+              child: Text('Exit',
+                textAlign: TextAlign.right,
+                style: TextStyle(fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline),
+              ),
+            ),
+          ),
+        ],)
     );
   }
-
 }

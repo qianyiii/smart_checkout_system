@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_checkout_system/welcome.dart';
 
 class AdminHomePage extends StatelessWidget {
   @override
@@ -38,6 +39,34 @@ class AdminHome extends StatefulWidget {
 class _AdminHomeState extends State<AdminHome> {
   int _selectedIndex = 0;
 
+  Future<void> _showLogoutConfimation(BuildContext context) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text('Confirm Logout'),
+            content: Text('Are you sure want to logout ?'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Yes'),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()),);
+                },
+              ),
+              TextButton(
+                child: Text('No'),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +80,14 @@ class _AdminHomeState extends State<AdminHome> {
                 child: NavigationRail(
                   selectedIndex: _selectedIndex,
                   onDestinationSelected: (int index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
+                    if (index == 5) {
+                      _showLogoutConfimation(context);
+
+                    } else {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
+                    }
                   },
                   labelType: NavigationRailLabelType.selected,
                   backgroundColor: Colors.deepOrange,
@@ -103,9 +137,7 @@ class _AdminHomeState extends State<AdminHome> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(height: 20),
-                    Center(
-                      child: Text('Page Number: $_selectedIndex'),
-                    ),
+
                   ],
                 ),
               ),
