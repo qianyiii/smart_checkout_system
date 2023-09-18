@@ -1,8 +1,6 @@
-import 'package:flutter/services.dart';
 import 'package:smart_checkout_system/login.dart';
 import 'package:smart_checkout_system/registration.dart';
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
 
 class Welcome extends StatefulWidget {
   static String id = 'welcome';
@@ -70,7 +68,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
             ),
           ),
           Positioned(
-            bottom: 240,
+            bottom: 195,
             right: 60,
             child: TextButton(onPressed: (){
               Navigator.push(context,
@@ -86,29 +84,13 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
             ),
           ),
           Positioned(
-            bottom: 195,
+            bottom: 140,
             right: 50,
             child: TextButton(onPressed: (){
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Registration()),);
             },
               child: Text('Register',
-                textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 140,
-            right: 60,
-            child: TextButton(onPressed: (){
-              html.window.close();
-              SystemNavigator.pop(); // 直接退出应用程序
-            },
-              child: Text('Exit',
                 textAlign: TextAlign.right,
                 style: TextStyle(fontSize: 16,
                     fontWeight: FontWeight.bold,

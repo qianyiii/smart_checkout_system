@@ -51,6 +51,7 @@ class _LoginState extends State<Login> {
               children: [
                 Container(
                     alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(left: 20),
                     child: Text(
                       'Welcome Back !',
                       style: TextStyle(fontSize: 24,
@@ -58,7 +59,7 @@ class _LoginState extends State<Login> {
                     )
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
+                  margin: EdgeInsets.only(top: 20, bottom: 40,left: 20, right: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -90,17 +91,19 @@ class _LoginState extends State<Login> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Your email...',
+                      prefixIcon: Icon(Icons.email_rounded),
                     ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: EdgeInsets.only(bottom: 50),
                   child: TextFormField(
                     style: TextStyle(fontSize: 14),
                     obscureText: true,
                     controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: 'Password',
+                      prefixIcon: Icon(Icons.password),
                     ),
                   ),
                 ),

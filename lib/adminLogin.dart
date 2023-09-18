@@ -17,7 +17,7 @@ class _AdminLoginState extends State<AdminLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login'),
+      appBar: AppBar(title: Text('Administrator Login'),
         centerTitle: true,),
       body: Stack(children: [
         Container(
@@ -49,9 +49,9 @@ class _AdminLoginState extends State<AdminLogin> {
               children: [
                 Container(
                     alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.only(bottom: 25),
+                    margin: EdgeInsets.only(left: 20, bottom: 35),
                     child: Text(
-                      'Welcome Back !',
+                      'Welcome back, admin !',
                       style: TextStyle(fontSize: 24,
                           fontWeight: FontWeight.bold),
                     ),
@@ -64,17 +64,19 @@ class _AdminLoginState extends State<AdminLogin> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Your email...',
+                      prefixIcon: Icon(Icons.email_rounded),
                     ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: EdgeInsets.only(bottom: 50),
                   child: TextFormField(
                     style: TextStyle(fontSize: 14),
                     obscureText: true,
                     controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: 'Password',
+                      prefixIcon: Icon(Icons.password),
                     ),
                   ),
                 ),
