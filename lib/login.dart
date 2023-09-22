@@ -103,7 +103,7 @@ class _LoginState extends State<Login> {
                     controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: 'Password',
-                      prefixIcon: Icon(Icons.password),
+                      prefixIcon: Icon(Icons.lock),
                     ),
                   ),
                 ),

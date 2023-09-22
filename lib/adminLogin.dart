@@ -76,7 +76,7 @@ class _AdminLoginState extends State<AdminLogin> {
                     controller: _passwordController,
                     decoration: InputDecoration(
                       hintText: 'Password',
-                      prefixIcon: Icon(Icons.password),
+                      prefixIcon: Icon(Icons.lock_outline_rounded),
                     ),
                   ),
                 ),
