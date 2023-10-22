@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "758106473796",
+    "project_id": "smart-checkout-c03cc",
+    "storage_bucket": "smart-checkout-c03cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758106473796:android:e88122da7e5093d4458311",
+        "android_client_info": {
+          "package_name": "com.qianyi.smartCheckout"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgWNor0PmDQkHXefXMh017uIzbdRlMe8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
