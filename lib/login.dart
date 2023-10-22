@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/adminLogin.dart';
 import 'package:smart_checkout_system/home.dart';
 import 'package:smart_checkout_system/registration.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   static String id = 'login';
@@ -13,8 +14,11 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  String? email;
+  String? password;
 
-
+  //create a private FirebaseAuth instance
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +116,8 @@ class _LoginState extends State<Login> {
                   width: 150,
                   height: 40,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      try{
                       String email = _emailController.text.trim();
                       String password = _passwordController.text.trim();
 
@@ -124,8 +129,20 @@ class _LoginState extends State<Login> {
                         return;
                       }
 
-                      Navigator.push(context,
+                      // 使用 Firebase Authentication 服务来进行身份验证
+                      var userCredential = await _auth.signInWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+
+                      // 如果身份验证成功，则跳转到主页
+                      if (userCredential != null && userCredential.user != null) {
+                        Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Home()),);
+                      }
+                      } catch (e) {
+                        print(e);
+                      }
                       },
                     child: Text('Login'),
                   ),
@@ -149,7 +166,6 @@ class _LoginState extends State<Login> {
           ),
         )
       ],),
-
     );
   }
 }

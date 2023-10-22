@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/welcome.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Registration extends StatefulWidget {
   static String id = 'registration';
@@ -16,35 +17,72 @@ class _RegistrationState extends State<Registration> {
   final TextEditingController _phoneController = TextEditingController();
   bool _isTermsAccepted = false;
   String? _termOfUseError;
+  String? email;
+  String? password;
 
-  void _register() {
+  //create a private FirebaseAuth instance
+  final _auth = FirebaseAuth.instance;
+
+  void _register() async {
     setState(() {
-      _termOfUseError =
-      _isTermsAccepted ? null : '  Please accept the terms of use.';
+      _termOfUseError = _isTermsAccepted ? null : '  Please accept the terms of use.';
     });
 
     if (_formKey.currentState!.validate() && _isTermsAccepted) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Registration success'),
-            content: Text('You have successful registration！'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => Welcome()),);
-                },
-                child: Text('Ok'),
-              ),
-            ],
+      try {
+        var userCredential = await _auth.createUserWithEmailAndPassword(email: email!, password: password!);
+
+        if (userCredential != null && userCredential.user != null) {
+          // 用户注册成功，弹出成功注册的对话框
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Registration success'),
+                content: Text('You have successfully registered !'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      // 注册成功后，您可以在这里进行其他操作，比如跳转到首页
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Welcome()));
+                    },
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
           );
-        },
-      );
+        }
+      } catch (e) {
+        print(e);
+
+        // 如果 Firebase 返回错误，检查错误码以判断具体错误类型
+        if (e is FirebaseAuthException) {
+          if (e.code == 'email-already-in-use') {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Registration Failed'),
+                  content: Text('This email address is already in use by another account. Please try registering with a different email or log in with your existing account.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Ok'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        }
+      }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +168,10 @@ class _RegistrationState extends State<Registration> {
                 Container(
                   width: 450,
                   child: TextFormField(
+                    style: TextStyle(color: Colors.black),
+                    onChanged: (value){
+                      email = value;
+                    },
                   controller: _emailController,
                   decoration: InputDecoration(
                     hintText: 'Email',
@@ -139,11 +181,13 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ),
                   ),
-                  validator: (value){
-                    if (value == null || value.isEmpty){
-                      return 'Please enter your email.';
-                    }
-                    return null;
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email.';
+                      } else if (!RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+').hasMatch(value)) {
+                        return 'Invalid email address';
+                      }
+                      return null;
                     },
                   ),
                 ),
@@ -172,6 +216,11 @@ class _RegistrationState extends State<Registration> {
                 Container(
                   width: 450,
                   child: TextFormField(
+                    style: TextStyle(color: Colors.black),
+                    onChanged: (value){
+                      password = value;
+                    },
+                    obscureText: true,
                   controller: _passwordController,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -181,11 +230,13 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ),
                   ),
-                  validator: (value){
-                    if (value == null || value.isEmpty){
-                      return 'Please enter your password.';
-                    }
-                    return null;
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password.';
+                      } else if (value.length < 6) {
+                        return 'Password must be at least 6 characters long.';
+                      }
+                      return null;
                     },
                   ),
                 ),
