@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/welcome.dart';
+import 'package:smart_checkout_system/addProduct.dart';
+
 
 class AdminHomePage extends StatelessWidget {
   @override
@@ -38,6 +40,17 @@ class AdminHome extends StatefulWidget {
 
 class _AdminHomeState extends State<AdminHome> {
   int _selectedIndex = 0;
+
+  void _openAddProductForm() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddProduct(
+        ),
+      ),
+    );
+  }
+
 
   Future<void> _showLogoutConfimation(BuildContext context) async {
     return showDialog<void>(
@@ -137,22 +150,89 @@ class _AdminHomeState extends State<AdminHome> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(height: 20),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage('images/person.jpg'),
+                          radius: 30,
+                        ),
+                      ),
+                    ),
+                    if (_selectedIndex == 1)
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                child: Container(
+                                  margin: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.add,
+                                        size: 40.0,
+                                      ),
+                                      Text(
+                                        'Add Product',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                    _openAddProductForm();
+                                  });
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                child: Container(
+                                  margin: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.view_list_outlined,
+                                        size: 40.0,
+                                      ),
+                                      Text(
+                                        'View Product',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                onTap: (){
+                                  setState(() {
 
+                                  });
+                                },
+                              ),),
+                          ],
+
+                        ),
+                      ),
                   ],
                 ),
               ),
             ],
           ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: CircleAvatar(
-                backgroundImage: AssetImage('images/person.jpg'),
-                radius: 30,
-              ),
-            ),
-          ),
+
         ],
       ),
     );
