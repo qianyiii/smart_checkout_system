@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/welcome.dart';
 import 'package:smart_checkout_system/login.dart';
 import 'package:smart_checkout_system/registration.dart';
-import 'package:smart_checkout_system/home.dart';
+import 'package:smart_checkout_system/UserScreens/home.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 

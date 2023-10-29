@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/welcome.dart';
-import 'package:smart_checkout_system/addProduct.dart';
-
+import 'package:smart_checkout_system/AdminScreens/addProduct.dart';
+import 'package:smart_checkout_system/AdminScreens/viewProduct.dart';
 
 class AdminHomePage extends StatelessWidget {
   @override
@@ -46,6 +46,16 @@ class _AdminHomeState extends State<AdminHome> {
       context,
       MaterialPageRoute(
         builder: (context) => AddProduct(
+        ),
+      ),
+    );
+  }
+
+  void _viewProduct() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ViewProduct(
         ),
       ),
     );
@@ -219,7 +229,7 @@ class _AdminHomeState extends State<AdminHome> {
                                 ),
                                 onTap: (){
                                   setState(() {
-
+                                    _viewProduct();
                                   });
                                 },
                               ),),
@@ -227,12 +237,13 @@ class _AdminHomeState extends State<AdminHome> {
 
                         ),
                       ),
+
+
                   ],
                 ),
               ),
             ],
           ),
-
         ],
       ),
     );

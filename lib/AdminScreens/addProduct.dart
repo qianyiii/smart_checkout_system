@@ -14,6 +14,8 @@ class _AddProductState extends State<AddProduct> {
   final TextEditingController _productNameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController _productTagController = TextEditingController();
+
 
   //Create a Firestore instance
   final _firestore = FirebaseFirestore.instance;
@@ -23,10 +25,12 @@ class _AddProductState extends State<AddProduct> {
     String productName = _productNameController.text;
     double price = double.parse(_priceController.text);
     int quantity = int.parse(_quantityController.text);
+    String productTag = _productTagController.text;
 
-    if (productName.isNotEmpty && price > 0 && id.isNotEmpty && quantity > 0) {
+    if (productName.isNotEmpty && price > 0 && id.isNotEmpty && quantity > 0 && productTag.isNotEmpty) {
       _firestore.collection('items').add({
         'Id':id,
+        'item tag': productTag,
         'item name': productName,
         'price(RM)': price,
         'quantity': quantity,
@@ -36,7 +40,7 @@ class _AddProductState extends State<AddProduct> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Product added successfully!'),
-            duration: Duration(seconds: 5), // 设置SnackBar显示的时间
+            duration: Duration(seconds: 3), // 设置SnackBar显示的时间
           ),
         );
         // 清空文本框
@@ -44,6 +48,7 @@ class _AddProductState extends State<AddProduct> {
         _productNameController.clear();
         _priceController.clear();
         _quantityController.clear();
+        _productTagController.clear();
       }).catchError((error){
         //fail to add product
         print('Failed to add product: $error');
@@ -77,6 +82,15 @@ class _AddProductState extends State<AddProduct> {
               ),
             ),
             SizedBox(height: 20,),
+
+            Container(
+              width: 500,
+              child: TextField(
+                controller: _productTagController,
+                decoration: InputDecoration(labelText: 'Product Tag'),
+              ),
+            ),
+            SizedBox(height: 20),
 
             Container(
               width: 500,

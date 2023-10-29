@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_checkout_system/adminHome.dart';
+import 'package:smart_checkout_system/AdminScreens/adminHome.dart';
 
 class AdminLogin extends StatefulWidget {
   static String id = 'adminlogin';

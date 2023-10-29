@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/welcome.dart';
-import 'package:smart_checkout_system/account.dart';
+import 'package:smart_checkout_system/UserScreens/account.dart';
 
 class HomePage extends StatelessWidget {
   @override

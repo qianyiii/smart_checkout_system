@@ -144,7 +144,8 @@ class _RegistrationState extends State<Registration> {
                       TextFormField(
                   controller: _usernameController,
                   decoration: InputDecoration(
-                    hintText: 'Username',
+                    labelText: 'Full Name',
+                    prefixIcon: Icon(Icons.person_outline_rounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0), // 调整这里的数值以更改边框的圆角半径
@@ -153,6 +154,7 @@ class _RegistrationState extends State<Registration> {
                         width: 1.0, // 调整这里的数值以更改边框的宽度
                       ),
                     ),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                   validator: (value){
                     if (value == null || value.isEmpty){
@@ -174,7 +176,8 @@ class _RegistrationState extends State<Registration> {
                     },
                   controller: _emailController,
                   decoration: InputDecoration(
-                    hintText: 'Email',
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.mail_outline_rounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),
@@ -197,7 +200,8 @@ class _RegistrationState extends State<Registration> {
                   child: TextFormField(
                   controller: _phoneController,
                   decoration: InputDecoration(
-                    hintText: 'Phone',
+                    labelText: 'Phone No',
+                    prefixIcon: Icon(Icons.phone_rounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),
@@ -223,7 +227,8 @@ class _RegistrationState extends State<Registration> {
                     obscureText: true,
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    hintText: 'Password',
+                    labelText: 'Password',
+                    prefixIcon: Icon(Icons.lock_outline_rounded),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),

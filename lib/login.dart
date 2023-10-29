@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_checkout_system/adminLogin.dart';
-import 'package:smart_checkout_system/home.dart';
+import 'package:smart_checkout_system/UserScreens/home.dart';
 import 'package:smart_checkout_system/registration.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
