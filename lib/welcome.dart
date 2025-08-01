@@ -11,6 +11,9 @@ class Welcome extends StatefulWidget {
 
 //Add with SingleTickerProviderStateMixin to enable this state to act as the ticker provider for the AnimationController
 class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
+
+  final Color brownColor = Color(0xFF6D543F);
+
   //Create an AnimationController object
   AnimationController? controller;
 
@@ -52,54 +55,86 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('RFID Smart One-Time Checkout System'),
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Color(0xFF3A2517),  // dark brown color
           centerTitle: true,
           automaticallyImplyLeading: false,
         ),
         body: Stack(children: [
           Container(
-            //Used to decorate the container widget with an image as its background.
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('images/home.png'),
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 alignment: Alignment.center,
               ),
             ),
           ),
+
+          // Login Button
           Positioned(
             bottom: 195,
-            right: 60,
-            child: TextButton(onPressed: (){
-              Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Login()),);
-            },
-              child: Text('Login',
-                textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 16,
+            right: 40,
+            child: SizedBox(
+              width: 150,  // 统一宽度
+              child: ElevatedButton.icon(
+                icon: Icon(Icons.login, color: brownColor),
+                label: Text('Login',
+                  style: TextStyle(
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline),
+                    color: brownColor,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shadowColor: brownColor.withOpacity(0.4),
+                  elevation: 10,
+                  padding: EdgeInsets.symmetric(vertical: 12), // 水平由 SizedBox 控制
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    side: BorderSide(color: brownColor),
+                  ),
+                ),
               ),
             ),
           ),
+
+          // Register Button
           Positioned(
-            bottom: 140,
-            right: 50,
-            child: TextButton(onPressed: (){
-              Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Registration()),);
-            },
-              child: Text('Register',
-                textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 16,
+            bottom: 130,
+            right: 40,
+            child: SizedBox(
+              width: 150,
+              child: ElevatedButton.icon(
+                icon: Icon(Icons.person_add_rounded, color: brownColor),
+                label: Text('Register',
+                  style: TextStyle(
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline),
+                    color: brownColor,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Registration()));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shadowColor: brownColor.withOpacity(0.4),
+                  elevation: 6,
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    side: BorderSide(color: brownColor),
+                  ),
+                ),
               ),
             ),
           ),
-        ],)
+        ])
+
     );
   }
 }
