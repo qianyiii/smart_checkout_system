@@ -103,16 +103,18 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
               SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  hintText: 'Email',
                   border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.email_outlined, color: brownColor),
                 ),
               ),
               SizedBox(height: 16),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: 'Password',
+                  hintText: 'Password',
                   border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.lock_outline, color: brownColor),
                 ),
               ),
               SizedBox(height: 24),
